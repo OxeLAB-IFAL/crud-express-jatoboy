@@ -1,0 +1,30 @@
+<h1>SIGAA</h1>
+
+<h2>Professores:</h2>
+<ul>
+  <% for(let i=0; i<professores.length; i++) {%>
+    <li>
+         Professor: <%= professores[i].nome %> <b>Matricula:</b>  <%= professores[i].matricula %>
+    </li>
+    <li>
+         Departamento: <%= professores[i].departamento %>
+    </li>
+    <br>
+    <% } %>
+  </ul>
+
+<h2>Alunos</h2>
+<ul>
+  <% for(let i=0; i<alunos.length; i++) {%>
+    <li>
+         Aluno: <%= alunos[i].nome %> <b>Matricula:</b> <%= alunos[i].matricula %>
+    </li>
+    <li>
+         Curso: <%= alunos[i].curso %>
+    </li>
+    <li>
+         Email: <%= alunos[i].email %>
+    </li>
+    <br>
+    <% } %>
+  </ul>

@@ -1,0 +1,12 @@
+let alunos = [
+    {nome: 'João', idade: 18},
+    {nome: 'Maria', idade: 20},
+    {nome: 'José', idade: 22},
+    {nome: 'Pedro', idade: 24}
+];
+
+app.get('/alunos', (req, res) => {
+    res.render('alunos', {alunos: alunos});
+});
+```
+

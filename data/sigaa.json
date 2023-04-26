@@ -1,0 +1,39 @@
+{
+  "alunos": [
+    {
+      "id": 1,
+      "matricula": 2019309600,
+      "nome": "Gabriel Jatobá",
+      "email": "gvj1@aluno.ifal.edu.br",
+      "curso": "Informática"
+    },
+    {
+      "id": 2,
+      "matricula": 2019309601,
+      "nome": "Maria Santos",
+      "email": "maria.santos@ifal.edu.br",
+      "curso": "Química"
+    },
+    {
+      "id": 3,
+      "matricula": 2019309602,
+      "nome": "João Silva",
+      "email": "joao.silva@ifsp.edu.br",
+      "curso": "Engenharia de Computação"
+    }
+  ],
+  "professores": [
+    { 
+      "id": 1,
+      "matricula": 1024012,
+      "nome": "Leonardo da Silva",
+      "departamento": "Sistemas da Informação"
+    },
+    {
+      "id": 2,
+      "matricula": 1024013,
+      "nome": "Augusto",
+      "departamento": "Informática"
+    }
+  ]
+}
