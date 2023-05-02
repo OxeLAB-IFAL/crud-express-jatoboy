@@ -1,30 +1,159 @@
-<h1>SIGAA</h1>
+<!-- Add bootstrap CDN link in the head section -->
+<head>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+     body {
+       margin: 0 250px;
+     }
+   </style>
+ 
+</head>
 
-<h2>Professores:</h2>
-<ul>
-  <% for(let i=0; i<professores.length; i++) {%>
-    <li>
-         Professor: <%= professores[i].nome %> <b>Matricula:</b>  <%= professores[i].matricula %>
-    </li>
-    <li>
-         Departamento: <%= professores[i].departamento %>
-    </li>
-    <br>
-    <% } %>
-  </ul>
+<body>
+     <h1 class="text-center"><b>SIGAA</b></h1>
 
-<h2>Alunos</h2>
-<ul>
-  <% for(let i=0; i<alunos.length; i++) {%>
-    <li>
-         Aluno: <%= alunos[i].nome %> <b>Matricula:</b> <%= alunos[i].matricula %>
-    </li>
-    <li>
-         Curso: <%= alunos[i].curso %>
-    </li>
-    <li>
-         Email: <%= alunos[i].email %>
-    </li>
-    <br>
-    <% } %>
-  </ul>
+     <h2 class="mt-5">Professores: (<%= professores.length %>)</h2> 
+     <button type="button" class="btn btn-primary my-3" data-toggle="modal" data-target="#createProfessorModal"><i class="fa fa-plus"></i> Criar professor</button>
+          <ul class="list-group">
+               <% for(let i=0; i<professores.length; i++) {%>
+                    <li class="list-group-item">
+                         <b><%= professores[i].nome %></b><br>
+                         Matricula: <%= professores[i].matricula %><br>
+                         Departamento: <%= professores[i].departamento %>
+                         <a class="btn btn-danger float-right" onclick="deleteProfessor(<%= professores[i].id %>)"><i class="fa fa-trash"></i></a>
+                    </li>
+                    <br>
+               <% } %>
+          </ul>
+
+     <h2 class="mt-5">Alunos (<%= alunos.length %>)</h2>
+     <button type="button" class="btn btn-primary my-3" data-toggle="modal" data-target="#createAlunoModal"><i class="fa fa-plus"></i> Criar aluno</button>
+          <ul class="list-group">
+               <% for(let i=0; i<alunos.length; i++) {%>
+                    <li class="list-group-item">
+                         <b><%= alunos[i].nome %></b><br>
+                         Matricula: <%= alunos[i].matricula %><br>
+                         Curso: <%= alunos[i].curso %><br>
+                         Email: <%= alunos[i].email %>
+                         <a class="btn btn-danger float-right" onclick="deleteAluno(<%= alunos[i].id %>)"><i class="fa fa-trash"></i></a>
+                    </li>
+                    <br>
+               <% } %>
+          </ul>
+          
+          app.put("/professores/:id", (req, res) => {
+               const id = req.params.id;
+               const professor = buscarProfessor(id);
+             
+               if (professor !== -1) {
+                 data.professores[professor].matricula = req.body.matricula;
+                 data.professores[professor].nome = req.body.nome;
+                 data.professores[professor].departamento = req.body.departamento;
+             
+                 res.status(200).json(data.professores[professor]);
+               } else {
+                 res.status(404).send("Professor não encontrado!");
+               }
+             });
+             
+          <div class="modal fade" id="createProfessorModal" tabindex="-1" role="dialog" aria-labelledby="createProfessorModalLabel" aria-hidden="true">
+               <div class="modal-dialog" role="document">
+                 <div class="modal-content">
+                   <div class="modal-header">
+                     <h5 class="modal-title" id="createProfessorModalLabel">Criar professor</h5>
+                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                       <span aria-hidden="true">&times;</span>
+                     </button>
+                   </div>
+                   <div class="modal-body">
+                     <form action="/professores" method="POST">
+                       <div class="form-group">
+                         <label for="nome">Nome:</label>
+                         <input type="text" name="nome" id="nome" class="form-control" required>
+                       </div>
+                       <div class="form-group">
+                         <label for="matricula">Matricula:</label>
+                         <input type="number" name="matricula" id="matricula" class="form-control" required>
+                       </div>
+                       <div class="form-group">
+                         <label for="departamento">Departamento:</label>
+                         <input type="text" name="departamento" id="departamento" class="form-control" required>
+                       </div>
+                       <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> Criar Novo</button>
+                     </form>
+                   </div>
+                 </div>
+               </div>
+             </div>
+
+             <div class="modal fade" id="createAlunoModal" tabindex="-1" role="dialog" aria-labelledby="createAlunoModalLabel" aria-hidden="true">
+               <div class="modal-dialog" role="document">
+                 <div class="modal-content">
+                   <div class="modal-header">
+                     <h5 class="modal-title" id="createAlunoModalLabel">Criar Aluno</h5>
+                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                       <span aria-hidden="true">&times;</span>
+                     </button>
+                   </div>
+                   <div class="modal-body">
+                     <form action="/alunos" method="POST">
+                       <div class="form-group">
+                         <label for="nome">Nome:</label>
+                         <input type="text" name="nome" id="nome" class="form-control" required>
+                       </div>
+                       <div class="form-group">
+                         <label for="matricula">Matricula:</label>
+                         <input type="number" name="matricula" id="matricula" class="form-control" required>
+                       </div>
+                       <div class="form-group">
+                         <label for="email">Email:</label>
+                         <input type="text" name="email" id="email" class="form-control" required>
+                       </div>
+                       <div class="form-group">
+                         <label for="curso">Curso:</label>
+                         <input type="text" name="curso" id="curso" class="form-control" required>
+                       </div>
+                       <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> Criar Novo</button>
+                     </form>
+                   </div>
+                 </div>
+               </div>
+             </div>
+
+          <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+          <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+          <script>
+                function deleteProfessor(id) {
+                 fetch("/professores/" + id, {
+                   method: "DELETE"
+                 })
+                 .then(response => {
+                   if (response.ok) {
+                     window.location.reload();
+                   } else {
+                     alert("Professor não encontrado!");
+                   }
+                 })
+                 .catch(error => {
+                   alert("Ocorreu um erro ao excluir o professor!");
+                 });
+               }
+
+               function deleteAluno(id) {
+                 fetch("/alunos/" + id, {
+                   method: "DELETE"
+                 })
+                 .then(response => {
+                   if (response.ok) {
+                     window.location.reload();
+                   } else {
+                     alert("Aluno não encontrado!");
+                   }
+                 })
+                 .catch(error => {
+                   alert("Ocorreu um erro ao excluir o aluno!");
+                 });
+               }
+             </script>
+</body>

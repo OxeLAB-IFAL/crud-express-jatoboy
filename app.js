@@ -1,5 +1,6 @@
 const express = require("express");
 let ejs = require("ejs");
+const bodyParser = require("body-parser");
 const data = require("./data/sigaa.json");
 
 const app = express();
@@ -7,6 +8,7 @@ const port = 3000;
 
 //Informa que o express deve converter automaticamente o corpo requisições e respostas para JSON
 app.use(express.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // Informa o template engine que será utilizado
 app.set("view engine", "ejs");
@@ -58,7 +60,7 @@ app.post("/alunos", (req, res) => {
   };
 
   data.alunos.push(novoAluno);
-  res.status(200).json(novoAluno);
+  res.status(200).send("Aluno cadastrado com sucesso!");
 });
 
 app.post("/professores", (req, res) => {
@@ -69,7 +71,7 @@ app.post("/professores", (req, res) => {
   };
 
   data.professores.push(novoProfessor);
-  res.status(200).json(novoProfessor);
+  res.status(200).send("Professor cadastrado com sucesso!");
 });
 
 // Rota de Atualização
