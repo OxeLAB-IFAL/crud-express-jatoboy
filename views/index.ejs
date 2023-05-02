@@ -41,21 +41,6 @@
                     <br>
                <% } %>
           </ul>
-          
-          app.put("/professores/:id", (req, res) => {
-               const id = req.params.id;
-               const professor = buscarProfessor(id);
-             
-               if (professor !== -1) {
-                 data.professores[professor].matricula = req.body.matricula;
-                 data.professores[professor].nome = req.body.nome;
-                 data.professores[professor].departamento = req.body.departamento;
-             
-                 res.status(200).json(data.professores[professor]);
-               } else {
-                 res.status(404).send("Professor não encontrado!");
-               }
-             });
              
           <div class="modal fade" id="createProfessorModal" tabindex="-1" role="dialog" aria-labelledby="createProfessorModalLabel" aria-hidden="true">
                <div class="modal-dialog" role="document">
