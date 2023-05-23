@@ -21,11 +21,42 @@
                          <b><%= professores[i].nome %></b><br>
                          Matricula: <%= professores[i].matricula %><br>
                          Departamento: <%= professores[i].departamento %>
+                         <button type="button" class="btn btn-primary btn-sm float-right" onclick="openEditModal(<%= i %>)"><i class="fa fa-edit"></i> Editar</button> 
                          <a class="btn btn-danger float-right" onclick="deleteProfessor(<%= professores[i].id %>)"><i class="fa fa-trash"></i></a>
                     </li>
                     <br>
                <% } %>
           </ul>
+
+          <div class="modal fade" id="createProfessorModal" tabindex="-1" role="dialog" aria-labelledby="createProfessorModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="createProfessorModalLabel">Criar professor</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form action="/professores" method="POST">
+                    <div class="form-group">
+                      <label for="nome">Nome:</label>
+                      <input type="text" name="nome" id="nome" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="matricula">Matricula:</label>
+                      <input type="number" name="matricula" id="matricula" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                      <label for="departamento">Departamento:</label>
+                      <input type="text" name="departamento" id="departamento" class="form-control" required>
+                    </div>
+                    <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> Criar Novo</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
 
      <h2 class="mt-5">Alunos (<%= alunos.length %>)</h2>
      <button type="button" class="btn btn-primary my-3" data-toggle="modal" data-target="#createAlunoModal"><i class="fa fa-plus"></i> Criar aluno</button>
@@ -42,36 +73,6 @@
                <% } %>
           </ul>
              
-          <div class="modal fade" id="createProfessorModal" tabindex="-1" role="dialog" aria-labelledby="createProfessorModalLabel" aria-hidden="true">
-               <div class="modal-dialog" role="document">
-                 <div class="modal-content">
-                   <div class="modal-header">
-                     <h5 class="modal-title" id="createProfessorModalLabel">Criar professor</h5>
-                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                       <span aria-hidden="true">&times;</span>
-                     </button>
-                   </div>
-                   <div class="modal-body">
-                     <form action="/professores" method="POST">
-                       <div class="form-group">
-                         <label for="nome">Nome:</label>
-                         <input type="text" name="nome" id="nome" class="form-control" required>
-                       </div>
-                       <div class="form-group">
-                         <label for="matricula">Matricula:</label>
-                         <input type="number" name="matricula" id="matricula" class="form-control" required>
-                       </div>
-                       <div class="form-group">
-                         <label for="departamento">Departamento:</label>
-                         <input type="text" name="departamento" id="departamento" class="form-control" required>
-                       </div>
-                       <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> Criar Novo</button>
-                     </form>
-                   </div>
-                 </div>
-               </div>
-             </div>
-
              <div class="modal fade" id="createAlunoModal" tabindex="-1" role="dialog" aria-labelledby="createAlunoModalLabel" aria-hidden="true">
                <div class="modal-dialog" role="document">
                  <div class="modal-content">

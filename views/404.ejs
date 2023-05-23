@@ -1,0 +1,26 @@
+
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="text-center">
+      <h1 class="display-4">404</h1>
+      <p class="lead">Página não encontrada</p>
+      <% if (typeof entity !== 'undefined') { %>
+        <p class="text-muted">O <strong><%= entity %></strong> não foi encontrado(a).</p>
+      <% } %>
+
+      <a href="/" class="btn btn-primary">Voltar para a página inicial</a>
+    </div>
+  </div>
+</body>

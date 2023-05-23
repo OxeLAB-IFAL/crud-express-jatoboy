@@ -13,12 +13,13 @@ router.get('/:id', (req, res) => {
     if (aluno !== -1) {
       res.status(200).json(data.alunos[aluno]);
     } else {
-      res.status(404).send("Aluno não encontrado!");
+      res.status(404).render('404', {entity: "Aluno"});
     }
 })
 
 router.post('/', (req, res) => {
     const novoAluno = {
+        id: data.alunos.length + 1,
         matricula: req.body.matricula,
         nome: req.body.nome,
         email: req.body.email,
@@ -26,7 +27,7 @@ router.post('/', (req, res) => {
       };
     
       data.alunos.push(novoAluno);
-      res.status(200).send("Aluno cadastrado com sucesso!");    
+      res.redirect('/') 
 })
 
 router.put('/:id', (req, res) => {
@@ -41,7 +42,7 @@ router.put('/:id', (req, res) => {
   
       res.status(200).json(data.alunos[aluno]);
     } else {
-      res.status(404).send("Aluno não encontrado!");
+      res.status(404).render('404', {entity: "Aluno"});
     }
   
 })
@@ -54,7 +55,7 @@ router.delete('/:id', (req, res) => {
       data.alunos.splice(aluno, 1);
       res.status(200).send("Aluno excluído com sucesso!");
     } else {
-      res.status(404).send("Aluno não encontrado!");
+      res.status(404).render('404', {entity: "Aluno"});
     }  
 })
 

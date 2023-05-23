@@ -13,19 +13,20 @@ router.get('/:id', (req, res) => {
     if (professor !== -1) {
       res.status(200).json(data.professores[professor]);
     } else {
-      res.status(404).send("Professor não encontrado!");
+      res.status(404).render('404', {entity: 'Professor'})
     }  
 })
 
 router.post('/', (req, res) => {
     const novoProfessor = {
+        id: data.professores.length + 1,
         matricula: req.body.matricula,
         nome: req.body.nome,
         departamento: req.body.departamento,
       };
     
       data.professores.push(novoProfessor);
-      res.status(200).send("Professor cadastrado com sucesso!");    
+      res.redirect('/')  
 })
 
 router.put('/:id', (req, res) => {
@@ -39,7 +40,7 @@ router.put('/:id', (req, res) => {
   
       res.status(200).json(data.professores[professor]);
     } else {
-      res.status(404).send("Professor não encontrado!");
+      res.status(404).render('404', {entity: 'Professor'})
     }  
 })
 
@@ -51,7 +52,7 @@ router.delete('/:id', (req, res) => {
       data.professores.splice(professor, 1);
       res.status(200).send("Professor excluído com sucesso!");
     } else {
-      res.status(404).send("Professor não encontrado!");
+      res.status(404).render('404', {entity: 'Professor'})
     }  
 })
 
