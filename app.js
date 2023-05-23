@@ -1,7 +1,6 @@
 const express = require("express");
 let ejs = require("ejs");
 const bodyParser = require("body-parser");
-const methodOverride = require('method-override');
 
 var indexRouter = require('./routes/index');
 var alunosRouter = require('./routes/alunos');
@@ -13,7 +12,6 @@ const port = 3000;
 //Informa que o express deve converter automaticamente o corpo requisições e respostas para JSON
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(methodOverride('_method'));
 
 app.set("view engine", "ejs");
 app.set("views", "./views");
